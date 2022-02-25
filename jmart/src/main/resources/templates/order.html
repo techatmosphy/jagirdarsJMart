@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>JMart</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="webjars/bootstrap/5.1.3/css/bootstrap.css" rel="stylesheet" />
+<script type="text/javascript"
+	src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+<script type="text/javascript"
+	src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/script.js"
+	th:src="@{js/script.js}"></script>
+<!-- <script type="text/javascript" src="../static/js/style.js" th:src="@{js/style.js}"></script> -->
+<!-- Boxicons CDN Link -->
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'
+	rel='stylesheet'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<div class="sidebar">
+		<div class="logo-details">
+			<i class='bx bxl-c-plus-plus'></i> <span class="logo_name">JMart</span>
+		</div>
+		<ul class="nav-links">
+			<li><a th:href="@{/index}" class="active"> <i class='bx bx-grid-alt'></i>
+					<span class="links_name">DASHBOARD</span>
+			</a></li>
+			<li><a th:href="@{/brand}"> <i class='bx bx-box'></i> <span
+					class="links_name">Brand</span>
+			</a></li>
+			<li><a th:href="@{/category}"> <i class='bx bx-list-ul'></i> <span
+					class="links_name">category</span>
+			</a></li>
+			<li><a th:href="@{/product}"> <i class='bx bx-pie-chart-alt-2'></i> <span
+					class="links_name">Products </span>
+			</a></li>
+			<li><a th:href="@{/inventory}"> <i class='bx bx-coin-stack'></i> <span
+					class="links_name">Inventory</span>
+			</a></li>
+			<li><a th:href="@{/order}"> <i class='bx bx-book-alt'></i> <span
+					class="links_name">Orders</span>
+			</a></li>
+			<li><a th:href="@{/userPage}"> <i class='bx bx-user'></i> <span
+					class="links_name">Users</span>
+			</a></li>
+			<li><a href="#"> <i class='bx bx-message'></i> <span
+					class="links_name">Messages</span>
+			</a></li>
+			<li><a href="#"> <i class='bx bx-heart'></i> <span
+					class="links_name">Favroites</span>
+			</a></li>
+			<li><a href="#"> <i class='bx bx-cog'></i> <span
+					class="links_name">Setting</span>
+			</a></li>
+			<li class="log_out"><a href="#"> <i class='bx bx-log-out'></i>
+					<span class="links_name">Log out</span>
+			</a></li>
+		</ul>
+	</div>
+	<section class="home-section">
+		<nav>
+			<div class="sidebar-button">
+				<i class='bx bx-menu sidebarBtn'></i> <span class="dashboard">Dashboard</span>
+			</div>
+			<div class="search-box">
+				<input type="text" placeholder="Search..."> <i
+					class='bx bx-search'></i>
+			</div>
+			<div class="profile-details">
+				<img src="images/profile.jpg" alt=""> <span class="admin_name">Sid
+					Dmk</span> <i class='bx bx-chevron-down'></i>
+			</div>
+		</nav>
+
+		<div class="home-content">
+			<div class="overview-boxes">
+				<div class="box">
+					<div class="right-side">
+						<div class="box-topic">Total Customer</div>
+						<div class="number">40,876</div>
+						<div class="indicator">
+							<i class='bx bx-up-arrow-alt'></i> <span class="text">Up
+								from yesterday</span>
+						</div>
+					</div>
+					<i class='bx bx-cart-alt cart'></i>
+				</div>
+				<div class="box">
+					<div class="right-side">
+						<div class="box-topic">Total Deposit</div>
+						<div class="number">38,876</div>
+						<div class="indicator">
+							<i class='bx bx-up-arrow-alt'></i> <span class="text">Up
+								from yesterday</span>
+						</div>
+					</div>
+					<i class='bx bxs-cart-add cart two'></i>
+				</div>
+				<div class="box">
+					<div class="right-side">
+						<div class="box-topic">Total Loan</div>
+						<div class="number">$12,876</div>
+						<div class="indicator">
+							<i class='bx bx-up-arrow-alt'></i> <span class="text">Up
+								from yesterday</span>
+						</div>
+					</div>
+					<i class='bx bx-cart cart three'></i>
+				</div>
+				<div class="box">
+					<div class="right-side">
+						<div class="box-topic">Total Return</div>
+						<div class="number">11,086</div>
+						<div class="indicator">
+							<i class='bx bx-down-arrow-alt down'></i> <span class="text">Down
+								From Today</span>
+						</div>
+					</div>
+					<i class='bx bxs-cart-download cart four'></i>
+				</div>
+			</div>
+
+			<div class="sales-boxes">
+				<div class="recent-sales box">
+					<div class="sales-details">
+						<div align="center" class="container">
+							<button type="button" class="btn btn-primary"
+								data-bs-toggle="modal" data-bs-target="#addModal">Add
+								User</button>
+
+							<table class="table table-striped" style="width: 80%">
+								<tr>
+									<td>Id</td>
+									<td>firstName</td>
+									<td>lastName</td>
+									<td>email</td>
+									<td>aadharNumber</td>
+									<td>mobileNumber</td>
+									<td>panNumber</td>
+									<td>Update</td>
+									<td>Delete</td>
+								</tr>
+								<tr th:each="user : ${listUsers}">
+									<td th:text="${user.id}">Id</td>
+									<td th:text="${user.firstName}">firstName</td>
+									<td th:text="${user.lastName}">lastName</td>
+									<td th:text="${user.email}">email</td>
+									<td th:text="${user.aadharNumber}">aadharNumber</td>
+									<td th:text="${user.mobileNumber}">mobileNumber</td>
+									<td th:text="${user.panNumber}">panNumber</td>
+									<td><a th:href="@{/getUser/(Id=${user.id})}"
+										class="btn btn-warning editButton">Update</a></td>
+									<td><a class="btn btn-danger deleteButton">Delete</a></td>
+								</tr>
+							</table>
+						</div>
+
+						<div class="modal fade" id="addModal" tabindex="-1"
+							aria-labelledby="exampleModalLabel" role="dialog"
+							aria-hidden="true">
+							<form th:action="@{/saveUser}" method="POST">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Add New
+												User</h5>
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+
+											<div class="form-group">
+												<label for="firstName" class="col-form-label">firstName:</label>
+												<input type="text" class="form-control" id="firstName"
+													name="firstName">
+											</div>
+											<div class="form-group">
+												<label for="lastName" class="col-form-label">lastName:</label>
+												<input type="text" class="form-control" id="lastName"
+													name="lastName">
+											</div>
+											<div class="form-group">
+												<label for="email" class="col-form-label">email:</label> <input
+													type="text" class="form-control" id="email" name="email">
+											</div>
+											<div class="form-group">
+												<label for="panNumber" class="col-form-label">panNumber:</label>
+												<input type="text" class="form-control" id="panNumber"
+													name="panNumber">
+											</div>
+											<div class="form-group">
+												<label for="aadharNumber" class="col-form-label">aadharNumber:</label>
+												<input type="text" class="form-control" id="aadharNumber"
+													name="aadharNumber">
+											</div>
+											<div class="form-group">
+												<label for="panNumber" class="col-form-label">panNumber:</label>
+												<input type="text" class="form-control" id="panNumber"
+													name="panNumber">
+											</div>
+											<div class="form-group">
+												<label for="mobileNumber" class="col-form-label">mobileNumber:</label>
+												<input type="text" class="form-control" id="mobileNumber"
+													name="mobileNumber">
+											</div>
+											<div class="form-group">
+												<label for="password" class="col-form-label">password:</label>
+												<input type="text" class="form-control" id="password"
+													name="password">
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-bs-dismiss="modal">Close</button>
+											<button type="submit" class="btn btn-primary">Save</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+
+						<!-- Edit Button -->
+						<div class="myForm">
+							<form th:action="@{/saveUser}" th:object="${user}" method="POST">
+								<div class="modal fade" id="editModal" tabindex="-1"
+									aria-labelledby="exampleModalLabel" role="dialog"
+									aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Add New
+													User</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+
+												<div class="form-group">
+													<label for="id" class="col-form-label">id:</label> <input
+														type="text" class="form-control" id="id" name="id">
+												</div>
+												<div class="form-group">
+													<label for="firstName" class="col-form-label">firstName:</label>
+													<input type="text" class="form-control" id="firstName"
+														name="firstName">
+												</div>
+												<div class="form-group">
+													<label for="lastName" class="col-form-label">lastName:</label>
+													<input type="text" class="form-control" id="lastName"
+														name="lastName">
+												</div>
+												<div class="form-group">
+													<label for="email" class="col-form-label">email:</label> <input
+														type="text" class="form-control" id="email" name="email">
+												</div>
+												<div class="form-group">
+													<label for="aadharNumber" class="col-form-label">aadharNumber:</label>
+													<input type="text" class="form-control" id="aadharNumber"
+														name="aadharNumber">
+												</div>
+												<div class="form-group">
+													<label for="mobileNumber" class="col-form-label">mobileNumber:</label>
+													<input type="text" class="form-control" id="mobileNumber"
+														name="mobileNumber">
+												</div>
+												<div class="form-group">
+													<label for="panNumber" class="col-form-label">panNumber:</label>
+													<input type="text" class="form-control" id="panNumber"
+														name="panNumber">
+												</div>
+												<div class="form-group">
+													<label for="password" class="col-form-label">password:</label>
+													<input type="text" class="form-control" id="password"
+														name="password">
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary">Save</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="button">
+						<a href="#">See All</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		let sidebar = document.querySelector(".sidebar");
+		let sidebarBtn = document.querySelector(".sidebarBtn");
+		sidebarBtn.onclick = function() {
+			sidebar.classList.toggle("active");
+			if (sidebar.classList.contains("active")) {
+				sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+			} else
+				sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+		}
+	</script>
+</body>
+</html>

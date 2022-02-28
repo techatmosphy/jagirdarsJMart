@@ -14,15 +14,27 @@ import com.mabmsa.app.service.CategoriesService;
 public class CategoriesServiceImpl implements CategoriesService {
 
 	@Autowired
-	private CategoriesRepository categoryService;
+	private CategoriesRepository categoriesRepository;
 
-	public List<Categories> showBrands() {
-		return categoryService.findAll();
+	@Override
+	public List<Categories> showCategories() {
+		return categoriesRepository .findAll();
 	}
 
-	public Optional<Categories> getBrand(Long id) {
-		return categoryService.findById(id);
+	@Override
+	public Optional<Categories> getCategories(Long categoryId) {
+		return categoriesRepository.findById(categoryId);
 
+	}
+	@Override
+	public void saveCategories(Categories categories) {
+		categoriesRepository .save(categories);
+		
+	}
+
+	public void deleteCategories(Long categoryId) {
+		categoriesRepository .deleteById(categoryId);
+		
 	}
 
 }

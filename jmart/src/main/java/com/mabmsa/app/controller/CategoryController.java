@@ -3,71 +3,58 @@ package com.mabmsa.app.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mabmsa.app.model.Brand;
 import com.mabmsa.app.model.Categories;
+import com.mabmsa.app.service.impl.BrandServiceImpl;
 import com.mabmsa.app.service.impl.CategoriesServiceImpl;
 
-@RestController
+@Controller
 public class CategoryController {
-
-	Logger logger = LogManager.getLogger(CategoryController.class);
 
 	@Autowired
 	private CategoriesServiceImpl categoryService;
+	@Autowired
+	private BrandServiceImpl brandServiceImpl;
 
-	@GetMapping(value = "/getCategories")
-	public Optional<Categories> getCategoriesById(Long Id, Model model) {
-		logger.info("Enter into BrandController getBrandById method");
-		return categoryService.getBrand(Id);
+	@RequestMapping(value = "/getCategories", method = RequestMethod.GET)
+	public Optional<Categories> getCategoriesById(@RequestParam(name = "categoryId") Long categoryId, Model model) {
+		return categoryService.getCategories(categoryId);
 	}
 
 	@GetMapping("/category")
 	public ModelAndView showCategory() {
-		ModelAndView mav = new ModelAndView("categoryPage");
-		List<Categories> categoriesList = categoryService.showBrands();
-		logger.info(categoriesList);
+		ModelAndView mav = new ModelAndView("category");
+		List<Categories> categoriesList = categoryService.showCategories();
+		List<Brand> brandList = brandServiceImpl.showBrands();
 		mav.addObject("categories", categoriesList);
-
+		mav.addObject("brandList", brandList);
 		return mav;
 	}
 
-//	@GetMapping("/brand")
-//	private String getBrand(Model model) {
-////		return findPaginated(1, "firstName", "asc", model);
-//	}
+	@RequestMapping(value = "/saveCategories", method = { RequestMethod.POST, RequestMethod.PUT, RequestMethod.GET })
+	public String saveCategories(@ModelAttribute("categories") Categories categories,BindingResult bindingResult) {
+		System.out.println(categories.toString());
+		categoryService.saveCategories(categories);
+		
+		return "redirect:/category?success";
 
-//	@GetMapping("/page/{pageNo}")
-//	public String findPaginated(@PathVariable(value = "pageNo") int pageNo, @RequestParam("sortField") String sortField,
-//			@RequestParam("sortDir") String sortDir, Model model) {
-//		int pageSize = 10;
-//
-//		Page<Brand> page = brandService.findPaginated(pageNo, pageSize, sortField, sortDir);
-//		List<Brand> listUsers = page.getContent();
-//
-//		model.addAttribute("currentPage", pageNo);
-//		model.addAttribute("totalPages", page.getTotalPages());
-//		model.addAttribute("totalItems", page.getTotalElements());
-//
-//		model.addAttribute("sortField", sortField);
-//		model.addAttribute("sortDir", sortDir);
-//		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-//
-//		model.addAttribute("listUsers", listUsers);
-//		return "brand";
-//	}
+	}
 
-//	@RequestMapping(value = "/saveBrand", method = { RequestMethod.POST, RequestMethod.PUT, RequestMethod.GET })
-//	public String saveBrand(@ModelAttribute("brand") BrandDto brandDto) {
-//		brandService.saveBrand(brandDto);
-//		return "redirect:/registration?success";
-//
-//	}
+	@RequestMapping(value = "/deleteCategories", method = RequestMethod.GET)
+	public String deleteCategories(@RequestParam(name = "categoryId") Long categoryId) {
+		categoryService.deleteCategories(categoryId);
+		return "redirect:/category?success";
+	}
 
 }

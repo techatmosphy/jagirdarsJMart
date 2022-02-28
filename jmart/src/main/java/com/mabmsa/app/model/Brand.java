@@ -1,5 +1,6 @@
 package com.mabmsa.app.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,42 +13,91 @@ public class Brand {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long brandId;
 	private String name;
-	private String title;
+	
+	private String dateCreated;
+	private String dateModified;
+	private Character isDeleted;
+	private String description;
+	
 
-	public Long getId() {
-		return id;
+	
+
+
+	public String getDateCreated() {
+		return dateCreated;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+
+	public void setDateCreated(String dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 
-	public String getName() {
-		return name;
+
+	public String getDateModified() {
+		return dateModified;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+
+	public void setDateModified(String dateModified) {
+		this.dateModified = dateModified;
 	}
 
-	public String getTitle() {
-		return title;
+
+	public Character getIsDeleted() {
+		return isDeleted;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+
+	public void setIsDeleted(Character isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Brand() {
 	}
 
-	public Brand(Long id, String name, String title) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.title = title;
+
+	public Long getBrandId() {
+		return brandId;
 	}
+
+
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public Brand(Long brandId, String name, String dateCreated, String dateModified, Character isDeleted,
+			String description) {
+		super();
+		this.brandId = brandId;
+		this.name = name;
+		this.dateCreated = dateCreated;
+		this.dateModified = dateModified;
+		this.isDeleted = isDeleted;
+		this.description = description;
+	}
+
 
 }

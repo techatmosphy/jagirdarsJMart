@@ -1,7 +1,5 @@
 package com.mabmsa.app.model;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,38 +9,90 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "product")
 public class Product {
-	@Id // Primary Key
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto generated
-	private Long id;
-	private String name;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long productId;
+
+	private String productName;
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	private String productCode;
+	private Integer productCount;
+
+	private String dateCreated;
+	private String dateModified;
+	private Character isDeleted;
 	private String description;
-	private Date add_date;
+	private String imageLink;
 
-	public Product() {
+	private String salePrice;
+	private Double price;
+	
+	private Double tax;
+//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "tax_id")
+//    private Tax tax;
+
+ //   private List<Offers> offers;
+
+
+	private Long categoryId;
+
+	public Long getProductId() {
+		return productId;
 	}
 
-	public Product(Long id, String name, String description, Date add_date) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.add_date = add_date;
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 
-	public Long getId() {
-		return id;
+
+
+	public String getProductCode() {
+		return productCode;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
 	}
 
-	public String getName() {
-		return name;
+	public Integer getProductCount() {
+		return productCount;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setProductCount(Integer productCount) {
+		this.productCount = productCount;
+	}
+
+	public String getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(String dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public String getDateModified() {
+		return dateModified;
+	}
+
+	public void setDateModified(String dateModified) {
+		this.dateModified = dateModified;
+	}
+
+	public Character getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(Character isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	public String getDescription() {
@@ -53,12 +103,69 @@ public class Product {
 		this.description = description;
 	}
 
-	public Date getAdd_date() {
-		return add_date;
+	public String getImageLink() {
+		return imageLink;
 	}
 
-	public void setAdd_date(Date add_date) {
-		this.add_date = add_date;
+	public void setImageLink(String imageLink) {
+		this.imageLink = imageLink;
 	}
+
+	public String getSalePrice() {
+		return salePrice;
+	}
+
+	public void setSalePrice(String salePrice) {
+		this.salePrice = salePrice;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Double getTax() {
+		return tax;
+	}
+
+	public void setTax(Double tax) {
+		this.tax = tax;
+	}
+
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public Product() {
+	}
+
+	public Product(Long productId, String productName, String productCode, Integer productCount, String dateCreated,
+			String dateModified, Character isDeleted, String description, String imageLink, String salePrice,
+			Double price, Double tax, Long categoryId) {
+		super();
+		this.productId = productId;
+		productName = productName;
+		this.productCode = productCode;
+		this.productCount = productCount;
+		this.dateCreated = dateCreated;
+		this.dateModified = dateModified;
+		this.isDeleted = isDeleted;
+		this.description = description;
+		this.imageLink = imageLink;
+		this.salePrice = salePrice;
+		this.price = price;
+		this.tax = tax;
+		this.categoryId = categoryId;
+	}
+    
+//	private Stocks stocks;
+//	
 
 }

@@ -25,14 +25,14 @@ public class BrandServiceImpl implements BrandService {
 	public void saveBrand(Brand brand) {
 		this.brandRepository.save(brand);
 	}
-
-	public Optional<Brand> getBrand(Long id) {
-		return brandRepository.findById(id);
+	@Override
+	public Optional<Brand> getBrand(Long brandId) {
+		return brandRepository.findById(brandId);
 
 	}
-
-	public void deleteBrand(Long id) {
-		brandRepository.deleteById(id);
+	@Override
+	public void deleteBrand(Long brandId) {
+		brandRepository.deleteById(brandId);
 
 	}
 

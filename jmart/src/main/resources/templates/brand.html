@@ -25,20 +25,24 @@
 			<i class='bx bxl-c-plus-plus'></i> <span class="logo_name">JMart</span>
 		</div>
 		<ul class="nav-links">
-			<li><a th:href="@{/index}" class="active"> <i class='bx bx-grid-alt'></i>
-					<span class="links_name">DASHBOARD</span>
+			<li><a th:href="@{/index}" class="active"> <i
+					class='bx bx-grid-alt'></i> <span class="links_name">DASHBOARD</span>
 			</a></li>
 			<li><a th:href="@{/brand}"> <i class='bx bx-box'></i> <span
 					class="links_name">Brand</span>
 			</a></li>
-			<li><a th:href="@{/category}"> <i class='bx bx-list-ul'></i> <span
-					class="links_name">Categories</span>
+			<li><a th:href="@{/category}"> <i class='bx bx-list-ul'></i>
+					<span class="links_name">Categories</span>
 			</a></li>
-			<li><a th:href="@{/product}"> <i class='bx bx-pie-chart-alt-2'></i> <span
-					class="links_name">Products </span>
+			<li><a th:href="@{/product}"> <i
+					class='bx bx-pie-chart-alt-2'></i> <span class="links_name">Products
+				</span>
 			</a></li>
-			<li><a th:href="@{/inventory}"> <i class='bx bx-coin-stack'></i> <span
-					class="links_name">Inventory</span>
+			<li><a th:href="@{/items}"> <i class='bx bx-pie-chart-alt-2'></i>
+					<span class="links_name">Items </span>
+			</a></li>
+			<li><a th:href="@{/inventory}"> <i class='bx bx-coin-stack'></i>
+					<span class="links_name">Inventory</span>
 			</a></li>
 			<li><a th:href="@{/order}"> <i class='bx bx-book-alt'></i> <span
 					class="links_name">Orders</span>
@@ -76,7 +80,7 @@
 		</nav>
 
 		<div class="home-content">
-			
+
 			<div class="sales-boxes">
 				<div class="recent-sales box">
 					<div class="sales-details">
@@ -88,23 +92,30 @@
 							<table class="table table-striped" style="width: 80%">
 								<tr>
 									<td>Brand Id</td>
-									<td>Company Name</td>
-									<td>Title</td>
+									<td>Brand Name</td>
+									<td>dateCreated</td>
+									<td>dateModified</td>
+									<td>isDeleted</td>
+									<td>description</td>
 									<td>Update</td>
 									<td>Delete</td>
 								</tr>
 								<tr th:each="brand : ${brands}">
-									<td th:text="${brand.id}">Id</td>
-									<td th:text="${brand.name}">Name</td>
-									<td th:text="${brand.title}">Title</td>
-									<td><a th:href="@{/getBrand/(Id=${brand.id})}"
+									<td th:text="${brand.brandId}">Brand Id</td>
+									<td th:text="${brand.name}">Company Name</td>
+									<td th:text="${brand.dateCreated}">Create Date</td>
+									<td th:text="${brand.dateModified}">Modify Date</td>
+									<td th:text="${brand.isDeleted}">isDeleted</td>
+									<td th:text="${brand.description}">Description</td>
+
+									<td><a th:href="@{/getBrand/(brandId=${brand.brandId})}"
 										class="btn btn-warning editButton">Update</a></td>
-									<td><a th:href="@{/deleteBrand/{id}(Id=${brand.id})}"
+									<td><a th:href="@{/deleteBrand(brandId=${brand.brandId})}"
 										class="btn btn-danger deleteButton">Delete</a></td>
 								</tr>
 							</table>
 						</div>
-
+						<!-- Add brand  -->
 						<div class="modal fade" id="addModal" tabindex="-1"
 							aria-labelledby="exampleModalLabel" role="dialog"
 							aria-hidden="true">
@@ -120,14 +131,28 @@
 										<div class="modal-body">
 
 											<div class="form-group">
-												<label for="name" class="col-form-label">name:</label>
-												<input type="text" class="form-control" id="name"
-													name="name">
+												<label for="Name" class="col-form-label">Name :</label> <input
+													type="text" class="form-control" id="name" name="name">
 											</div>
 											<div class="form-group">
-												<label for="title" class="col-form-label">title:</label>
-												<input type="text" class="form-control" id="lastName"
-													name="title">
+												<label for="Created Date" class="col-form-label">Created
+													Date :</label> <input type="text" class="form-control"
+													id="Created Date" name="dateCreated">
+											</div>
+											<div class="form-group">
+												<label for="dateModified" class="col-form-label">Modification
+													Date :</label> <input type="text" class="form-control"
+													id="dateModified" name="dateModified">
+											</div>
+											<div class="form-group">
+												<label for="isDeleted" class="col-form-label">Is
+													Deleted :</label> <input type="text" class="form-control"
+													id="isDeleted" name="isDeleted">
+											</div>
+											<div class="form-group">
+												<label for="description" class="col-form-label">Description
+													:</label> <input type="text" class="form-control" id="description"
+													name="description">
 											</div>
 										</div>
 										<div class="modal-footer">
@@ -142,14 +167,15 @@
 
 						<!-- Edit Button -->
 						<div class="myForm">
-							<form th:action="@{/saveBrand}" th:object="${user}" method="POST">
+							<form th:action="@{/saveBrand}" th:object="${brand}"
+								method="POST">
 								<div class="modal fade" id="editModal" tabindex="-1"
 									aria-labelledby="exampleModalLabel" role="dialog"
 									aria-hidden="true">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">Add New
+												<h5 class="modal-title" id="exampleModalLabel">Update
 													Brand</h5>
 												<button type="button" class="btn-close"
 													data-bs-dismiss="modal" aria-label="Close"></button>
@@ -157,19 +183,35 @@
 											<div class="modal-body">
 
 												<div class="form-group">
-													<label for="id" class="col-form-label">id:</label> <input
-														type="text" class="form-control" id="id" name="id">
+													<label for="brandId" class="col-form-label">Brand
+														Id :</label> <input type="text" class="form-control" id="brandId"
+														name="brandId">
 												</div>
 												<div class="form-group">
-													<label for="Name" class="col-form-label">name:</label>
-													<input type="text" class="form-control" id="name"
-														name="name">
+													<label for="Name" class="col-form-label">Name :</label> <input
+														type="text" class="form-control" id="name" name="name">
 												</div>
 												<div class="form-group">
-													<label for="title" class="col-form-label">title:</label>
-													<input type="text" class="form-control" id="title"
-														name="title">
+													<label for="Created Date" class="col-form-label">Created
+														Date :</label> <input type="text" class="form-control"
+														id="Created Date" name="dateCreated">
 												</div>
+												<div class="form-group">
+													<label for="dateModified" class="col-form-label">Modification
+														Date :</label> <input type="text" class="form-control"
+														id="dateModified" name="dateModified">
+												</div>
+												<div class="form-group">
+													<label for="isDeleted" class="col-form-label">Is
+														Deleted :</label> <input type="text" class="form-control"
+														id="isDeleted" name="isDeleted">
+												</div>
+												<div class="form-group">
+													<label for="description" class="col-form-label">Description
+														:</label> <input type="text" class="form-control" id="description"
+														name="description">
+												</div>
+
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"

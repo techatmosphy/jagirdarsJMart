@@ -32,10 +32,11 @@
 					class="links_name">Brand</span>
 			</a></li>
 			<li><a th:href="@{/category}"> <i class='bx bx-list-ul'></i>
-					<span class="links_name">Categories</span>
+					<span class="links_name">Category</span>
 			</a></li>
-			<li><a th:href="@{/product}"> <i class='bx bx-pie-chart-alt-2'>
-			</i> <span class="links_name">Products</span>
+			<li><a th:href="@{/product}"> <i
+					class='bx bx-pie-chart-alt-2'></i> <span class="links_name">Product
+				</span>
 			</a></li>
 			<li><a th:href="@{/items}"> <i
 					class='bx bx-pie-chart-alt-2'></i> <span class="links_name">Items
@@ -87,131 +88,63 @@
 						<div class="container">
 							<button type="button" class="btn btn-primary"
 								data-bs-toggle="modal" data-bs-target="#addModal">Add
-								Product</button>
-
+								Categories</button>
+							<!-- show tabele -->
 							<table class="table table-striped" style="width: 80%">
 								<tr>
-									<td>Product Id</td>
-
 									<td>Category Id</td>
-									<td>Product Name</td>
-									<td>Product Code</td>
-									<td>Product Count</td>
-									<td>Created Date</td>
-
-									<td>Modified Date</td>
-									<td>Description</td>
-									<td>Image Link</td>
-									<td>Price</td>
-									<td>Sale Price</td>
-									<td>Taxes</td>
-
+									<td>Brand Id</td>
+									<td>Name</td>
+									<td>Title</td>
 									<td>Update</td>
 									<td>Delete</td>
-
 								</tr>
-								<tr th:each="product : ${products}">
-									<td th:text="${product.productId}">Product Id</td>
-									<td th:text="${product.categoryId}">Product Category</td>
-									<td th:text="${product.productName}">Product Name</td>
-									<td th:text="${product.productCode}">Product Code</td>
-
-									<td th:text="${product.productCount}">Product Count</td>
-
-									<td th:text="${product.dateCreated}">Created Date</td>
-									<td th:text="${product.dateModified}">Modified Date</td>
-
-									<td th:text="${product.description}">Description </td>
-									<td th:text="${product.imageLink}">Image</td>
-									<td th:text="${product.price}">Price</td>
-
-									<td th:text="${product.salePrice}">Sale Price</td>
-									<td th:text="${product.tax}">Tax %</td>
-
-									<td><a th:href="@{/getProduct/(productId=${product.productId})}"
+								<tr th:each="category : ${categories}">
+									<td th:text="${category.categoryId}">Category Id</td>
+									<td th:text="${category.brandId}">Brand Id</td>
+									<td th:text="${category.name}">Name</td>
+									<td th:text="${category.title}">Title</td>
+									<td><a
+										th:href="@{/getCategories(categoryId=${category.categoryId})}"
 										class="btn btn-warning editButton">Update</a></td>
-									<td><a th:href="@{/deleteProduct(productId=${product.productId})}"
+									<td><a
+										th:href="@{/deleteCategories(categoryId=${category.categoryId})}"
 										class="btn btn-danger deleteButton">Delete</a></td>
 								</tr>
 							</table>
 						</div>
-	<!-- Add product  -->
+
 						<div class="modal fade" id="addModal" tabindex="-1"
 							aria-labelledby="exampleModalLabel" role="dialog"
 							aria-hidden="true">
-							<form th:action="@{/saveProduct}" method="POST">
+							<form th:action="@{/saveCategories}" th:object="${categories}"
+								method="POST">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
 											<h5 class="modal-title" id="exampleModalLabel">Add New
-												Product</h5>
+												Categories</h5>
 											<button type="button" class="btn-close"
 												data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
 										<div class="modal-body">
+
 											<div class="form-group">
-												Select Categories : <select name=categoryId class="form-select"
-													aria-label="Default select example">
-													<option value="">select Categories</option>
-													<option th:each="categories : ${categories}"
-														th:text="${categories.name}" th:value="${categories.categoryId}" />
+												Select Brand : <select name=brandId class="form-select" aria-label="Default select example">
+													<option value="">select Brand</option>
+													<option th:each="brand : ${brandList}"
+														th:text="${brand.name}" th:value="${brand.brandId}" />
 												</select>
 											</div>
 											<div class="form-group">
-												<label for="name" class="col-form-label">Product Name :</label> <input
-													type="text" class="form-control" id="name" name="productName">
+												<label for="name" class="col-form-label">Name :</label> <input
+													type="text" class="form-control" id="name" name="name">
 											</div>
 											<div class="form-group">
-												<label for="title" class="col-form-label">Product Code :</label> <input
-													type="text" class="form-control" id="title" name="productCode">
-											</div>
-											<div class="form-group">
-												<label for="gtin" class="col-form-label">Created Date :</label> <input
-													type="text" class="form-control" id="gtin" name="dateCreated">
-											</div>
-											<div class="form-group">
-												<label for="brand" class="col-form-label">Modified Date  :</label> <input
-													type="text" class="form-control" id="brand" name="dateModified">
-											</div>
-											<div class="form-group">
-												<label for="offerId" class="col-form-label">Description
-													:</label> <input type="text" class="form-control" id="offerId"
-													name="description">
-											</div>
-											<div class="form-group">
-												<label for="description" class="col-form-label">Price
-													:</label> <input type="text" class="form-control" id="description"
-													name="price">
-											</div>
-											<div class="form-group">
-												<label for="availability" class="col-form-label">Sale Price
-													:</label> <input type="text" class="form-control" id="offerId"
-													name="salePrice">
-											</div>
-											<div class="form-group">
-												<label for="imageLink" class="col-form-label">ImageLink
-													: </label> <input type="text" class="form-control" id="imageLink"
-													name="imageLink">
+												<label for="title" class="col-form-label">Title :</label> <input
+													type="text" class="form-control" id="title" name="title">
 											</div>
 
-											<div class="form-group">
-												<label for="color" class="col-form-label">Color : </label> <input
-													type="text" class="form-control" id="color" name="color">
-											</div>
-											<div class="form-group">
-												<label for="size" class="col-form-label">Size : </label> <input
-													type="text" class="form-control" id="size" name="size">
-											</div>
-											<div class="form-group">
-												<label for="weight" class="col-form-label">Weight :
-												</label> <input type="text" class="form-control" id="weight"
-													name="weight">
-											</div>
-
-											<div class="form-group">
-												<label for="taxes" class="col-form-label">Taxes : </label> <input
-													type="text" class="form-control" id="taxes" name="taxes">
-											</div>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary"
@@ -225,7 +158,7 @@
 
 						<!-- Edit Button -->
 						<div class="myForm">
-							<form th:action="@{/saveProduct}" th:object="${user}"
+							<form th:action="@{/saveCategories}" th:object="${Categories}"
 								method="POST">
 								<div class="modal fade" id="editModal" tabindex="-1"
 									aria-labelledby="exampleModalLabel" role="dialog"
@@ -233,19 +166,19 @@
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">Update
-													Product</h5>
+												<h5 class="modal-title" id="exampleModalLabel">Add New
+													Categories</h5>
 												<button type="button" class="btn-close"
 													data-bs-dismiss="modal" aria-label="Close"></button>
 											</div>
 											<div class="modal-body">
-
 												<div class="form-group">
-													<label for="id" class="col-form-label">Product Id :</label>
-													<input type="text" class="form-control" id="id" name="id">
+													<label for="categoryId" class="col-form-label">Category
+														Id</label> <input type="text" class="form-control" id="categoryId"
+														name="categoryId">
 												</div>
 												<div class="form-group">
-													<label for="Name" class="col-form-label">Name :</label> <input
+													<label for="name" class="col-form-label">Name :</label> <input
 														type="text" class="form-control" id="name" name="name">
 												</div>
 												<div class="form-group">

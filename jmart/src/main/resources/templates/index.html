@@ -25,20 +25,25 @@
 			<i class='bx bxl-c-plus-plus'></i> <span class="logo_name">JMart</span>
 		</div>
 		<ul class="nav-links">
-			<li><a th:href="@{/index}" class="active"> <i class='bx bx-grid-alt'></i>
-					<span class="links_name">DASHBOARD</span>
+			<li><a th:href="@{/index}" class="active"> <i
+					class='bx bx-grid-alt'></i> <span class="links_name">DASHBOARD</span>
 			</a></li>
 			<li><a th:href="@{/brand}"> <i class='bx bx-box'></i> <span
 					class="links_name">Brand</span>
 			</a></li>
-			<li><a th:href="@{/category}"> <i class='bx bx-list-ul'></i> <span
-					class="links_name">category</span>
+			<li><a th:href="@{/category}"> <i class='bx bx-list-ul'></i>
+					<span class="links_name">category</span>
 			</a></li>
-			<li><a th:href="@{/product}"> <i class='bx bx-pie-chart-alt-2'></i> <span
-					class="links_name">Products </span>
+			<li><a th:href="@{/product}"> <i
+					class='bx bx-pie-chart-alt-2'></i> <span class="links_name">Products
+				</span>
 			</a></li>
-			<li><a th:href="@{/inventory}"> <i class='bx bx-coin-stack'></i> <span
-					class="links_name">Inventory</span>
+			<li><a th:href="@{/items}"> <i
+					class='bx bx-pie-chart-alt-2'></i> <span class="links_name">Items
+				</span>
+			</a></li>
+			<li><a th:href="@{/inventory}"> <i class='bx bx-coin-stack'></i>
+					<span class="links_name">Inventory</span>
 			</a></li>
 			<li><a th:href="@{/order}"> <i class='bx bx-book-alt'></i> <span
 					class="links_name">Orders</span>
@@ -55,9 +60,11 @@
 			<li><a href="#"> <i class='bx bx-cog'></i> <span
 					class="links_name">Setting</span>
 			</a></li>
-			<li class="log_out"><a href="#"> <i class='bx bx-log-out'></i>
-					<span class="links_name">Log out</span>
+			<li class="log_out" sec:authorize="isAuthenticated()"><a
+				th:href="@{/logout}"> <i class='bx bx-log-out'></i>Logout
 			</a></li>
+			</a>
+			</li>
 		</ul>
 	</div>
 	<section class="home-section">
@@ -71,7 +78,7 @@
 			</div>
 			<div class="profile-details">
 				Welcome <span sec:authentication="principal.username"> User</span>
-					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+				<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
 			</div>
 		</nav>
 

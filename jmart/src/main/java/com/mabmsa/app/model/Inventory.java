@@ -16,21 +16,70 @@ public class Inventory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto generated
 	private Long id;
 	private String name;
-	private String description;
+	private String location;
 	private Date add_date;
-	private int quantity;
+	
+	private String productName;
+	private Double unitPrice;
+	
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public Double getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(Double productPrice) {
+		this.unitPrice = productPrice;
+	}
+
+	public Long getQtyInHand() {
+		return qtyInHand;
+	}
+
+	public void setQtyInHand(Long qtyInHand) {
+		this.qtyInHand = qtyInHand;
+	}
+
+	public Long getSoldQty() {
+		return soldQty;
+	}
+
+	public void setSoldQty(Long soldQty) {
+		this.soldQty = soldQty;
+	}
+
+	public Double getInventryValue() {
+		return inventryValue;
+	}
+
+	public void setInventryValue(Double d) {
+		this.inventryValue = d;
+	}
+
+	public Double getSalesValue() {
+		return salesValue;
+	}
+
+	public void setSalesValue(Double salesValue) {
+		this.salesValue = salesValue;
+	}
+
+	private Long qtyInHand;
+	private Long soldQty;
+	private Double inventryValue;
+	private Double salesValue;
+	
 
 	public Inventory() {
 	}
 
-	public Inventory(Long id, String name, String description, Date add_date, int quantity) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.add_date = add_date;
-		this.quantity = quantity;
-	}
+
 
 	public Long getId() {
 		return id;
@@ -48,12 +97,12 @@ public class Inventory {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public Date getAdd_date() {
@@ -64,11 +113,19 @@ public class Inventory {
 		this.add_date = add_date;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public Inventory(Long id, String name, String location, Date add_date, String productName, Double unitPrice,
+			Long qtyInHand, Long soldQty, Double inventryValue, Double salesValue) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.location = location;
+		this.add_date = add_date;
+		this.productName = productName;
+		this.unitPrice = unitPrice;
+		this.qtyInHand = qtyInHand;
+		this.soldQty = soldQty;
+		this.inventryValue = inventryValue;
+		this.salesValue = salesValue;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
 }

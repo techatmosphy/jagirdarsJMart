@@ -9,22 +9,43 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "categories")
-public class Categories {
+@Table(name = "Offers")
+public class Offers {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long categoryId;
+	private Long offerId;
 	private String name;
-	private String title;
-	private Long brandId;
-
+	private String status;
 	private Date dateCreated;
 	private Date dateModified;
 	private Character isDeleted;
 	private String description;
-	
-	
+
+	public Long getOfferId() {
+		return offerId;
+	}
+
+	public void setOfferId(Long offerId) {
+		this.offerId = offerId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Date getDateCreated() {
 		return dateCreated;
 	}
@@ -57,59 +78,19 @@ public class Categories {
 		this.description = description;
 	}
 
-	public Long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public Long getBrandId() {
-		return brandId;
-	}
-
-	public void setBrandId(Long brandId) {
-		this.brandId = brandId;
-	}
-
-
-	public Categories(Long categoryId, String name, String title, Long brandId, Date dateCreated, Date dateModified,
-			Character isDeleted, String description) {
+	public Offers(Long offerId, String name, String status, Date dateCreated, Date dateModified, Character isDeleted,
+			String description) {
 		super();
-		this.categoryId = categoryId;
+		this.offerId = offerId;
 		this.name = name;
-		this.title = title;
-		this.brandId = brandId;
+		this.status = status;
 		this.dateCreated = dateCreated;
 		this.dateModified = dateModified;
 		this.isDeleted = isDeleted;
 		this.description = description;
 	}
 
-	public Categories() {
-	}
-
-	@Override
-	public String toString() {
-		return "Categories [categoryId=" + categoryId + ", name=" + name + ", title=" + title + ", brandId=" + brandId
-				+ "]";
+	public Offers() {
 	}
 
 }

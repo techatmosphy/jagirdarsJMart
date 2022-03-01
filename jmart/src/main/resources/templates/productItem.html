@@ -90,32 +90,35 @@
 
 							<table class="table table-striped" style="width: 80%">
 								<tr>
-									<td>Bar code</td>
-									<td>Item Id</td>
-									<td>Product Id</td>
+									<th>Item Id</th>
 									<td>Item Name</td>
-									<td>Stock Status</td>
-									<td>Item Code</td>
-									<td>Item Count</td>
-									<td>Created Date</td>
-									<td>Modified Date</td>
-									<td>Deleted</td>
-
-									<td>Update</td>
-									<td>Delete</td>
+									<th>Bar code</th>
+									<th>Product Name</th>
+									<th>Stock Status</th>
+									<th>Item Code</th>
+									<th>Item Count</th>
+									<th>Created Date</th>
+									<th>Modified Date</th>
+									<th>Deleted</th>
+									<th>Update</th>
+									<th>Delete</th>
 
 								</tr>
 								<tr th:each="items : ${items}">
 									<td th:text="${items.itemId}">Item Id</td>
+									<td th:text="${items.itemName}">Item Name</td>
+									<td><img src="/barcode/${items.itemName}" width="200"
+										height="50"></td>
 									<td th:text="${items.barcode}">Bar code</td>
 									<td th:text="${items.productId}">Product Name</td>
-									<td th:text="${items.itemName}">Item Name</td>
+
 									<td th:text="${items.stockStatus}">Stock Status</td>
 									<td th:text="${items.itemCode}">Item Code</td>
 									<td th:text="${items.itemCount}">Item Count</td>
 									<td th:text="${items.dateCreated}">Created Date</td>
 									<td th:text="${items.dateModified}">Modified Date</td>
 									<td th:text="${items.isDeleted}">IsDeleted</td>
+
 
 									<td><a th:href="@{/getItem/(itemId=${items.itemId})}"
 										class="btn btn-warning editButton">Update</a></td>
